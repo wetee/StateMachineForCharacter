@@ -29,15 +29,23 @@ void UStateSword::ExitState() {
 }
 
 void UStateSword::BindInputComponent(UInputComponent* inputComponent) {
-	UE_LOG(LogTemp, Warning, TEXT("Binded input component SWORD STATE"))
+	UE_LOG(LogTemp, Warning, TEXT("Binded swing SWORD STATE"))
+	inputComponent->BindAction(FName("Swing"), IE_Pressed, this, &UStateSword::Swing);
 }
 
 void UStateSword::UnbindInputComponent(UInputComponent* inputComponent) {
-	UE_LOG(LogTemp, Warning, TEXT("Unbinded input component SWORD STATE"))
+	UE_LOG(LogTemp, Warning, TEXT("Unbinded swing SWORD STATE"))
+	inputComponent->RemoveActionBinding(FName("Swing"), IE_Pressed);
 }
 
 FString UStateSword::ToString() {
 	return FString("Sword State");	
 }
+
+void UStateSword::Swing() {
+	UE_LOG(LogTemp, Warning, TEXT("Swinged"))
+	
+}
+
 
 

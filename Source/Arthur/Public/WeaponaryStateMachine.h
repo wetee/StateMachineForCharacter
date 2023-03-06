@@ -19,10 +19,11 @@ class ARTHUR_API UWeaponaryStateMachine : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UWeaponaryStateMachine();
 
 private:
+	UInputComponent* playerInputComponentWSM;
+	
 	IState* currentState;
 	IState* previousState;
 	

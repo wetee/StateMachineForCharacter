@@ -33,5 +33,7 @@ public:
 	virtual void UnbindInputComponent(UInputComponent* inputComponent) override;
 
 	virtual FString ToString() override;
+
+	void Swing();
 		
 };

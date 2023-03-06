@@ -23,6 +23,7 @@ public:
 private:
 	UInputComponent* playerInputComponent;
 	UWeaponaryStateMachine* weaponaryStateMachine;
+	
 	UStateOnHand* stateOnHand;
 	UStateSword* StateSword;
 	

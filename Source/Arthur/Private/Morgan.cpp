@@ -13,13 +13,12 @@ AMorgan::AMorgan()
 	stateOnHand = CreateDefaultSubobject<UStateOnHand>(TEXT("On Hand"));
 	StateSword = CreateDefaultSubobject<UStateSword>(TEXT("Sword"));
 
+	weaponaryStateMachine->InitializeMachine();	
 }
 
 void AMorgan::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	weaponaryStateMachine->InitializeMachine();		
 }
 
 void AMorgan::Tick(float DeltaTime)
@@ -29,9 +28,10 @@ void AMorgan::Tick(float DeltaTime)
 
 void AMorgan::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent){
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	weaponaryStateMachine->BindInputComponent(PlayerInputComponent);
 	
 	playerInputComponent = PlayerInputComponent;
-	playerInputComponent->BindAction(FName("OnHand"),IE_Pressed, this, &AMorgan::chooseOnHand);
+	playerInputComponent->BindAction(FName("OnHand") ,IE_Pressed, this, &AMorgan::chooseOnHand);
 	playerInputComponent->BindAction(FName("Sword"),IE_Pressed, this, &AMorgan::chooseSword);
 }
 

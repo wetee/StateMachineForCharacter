@@ -19,7 +19,6 @@ void UStateOnHand::SetStateMachine(UWeaponaryStateMachine* newStateMachine) {
 	weaponaryStateMachine = newStateMachine;
 }
 
-
 void UStateOnHand::EnterState() {
 	UE_LOG(LogTemp, Warning, TEXT("Entered ON HAND state"))
 }
@@ -29,17 +28,22 @@ void UStateOnHand::ExitState() {
 }
 
 void UStateOnHand::BindInputComponent(UInputComponent* inputComponent) {
-	UE_LOG(LogTemp, Warning, TEXT("Binded input component ON HAND STATE"))
+	UE_LOG(LogTemp, Warning, TEXT("Binded grab ON HAND STATE"))
+	inputComponent->BindAction(FName("Grab"), IE_Pressed, this, &UStateOnHand::Grab);
 }
 
 void UStateOnHand::UnbindInputComponent(UInputComponent* inputComponent) {
-	UE_LOG(LogTemp, Warning, TEXT("Unbinded input component ON HAND STATE"))
+	UE_LOG(LogTemp, Warning, TEXT("Unbinded grab ON HAND STATE"))
+	inputComponent->RemoveActionBinding(FName("Grab"), IE_Pressed);
 }
 
 FString UStateOnHand::ToString() {
 	return FString("On Hand State");	
 }
 
+void UStateOnHand::Grab() {
+	UE_LOG(LogTemp, Warning, TEXT("grabbed"))
+}
 
 
 

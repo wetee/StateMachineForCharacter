@@ -25,26 +25,25 @@ void UWeaponaryStateMachine::SetState(IState* newState) {
 		UE_LOG(LogTemp, Warning, TEXT("Weaponary: You have already chose"));
 		return;
 	}
-	// currentState->UnbindInputComponent(playerInputComponent);
+	currentState->UnbindInputComponent(playerInputComponentWSM);
 	currentState->ExitState();
 
 	previousState = currentState;
 	currentState = newState;
 	
 	currentState->EnterState();
-	// currentState->BindInputComponent(playerInputComponent);
+	currentState->BindInputComponent(playerInputComponentWSM);
 }
 
 
 void UWeaponaryStateMachine::InitializeMachine() {
-	onHand = GetOwner()->FindComponentByClass<UStateOnHand>();
-	sword = GetOwner()->FindComponentByClass<UStateSword>();
+	onHand = Cast<IState>(GetOwner()->FindComponentByClass<UStateOnHand>());
+	sword =Cast<IState>(GetOwner()->FindComponentByClass<UStateSword>());
 
 	currentState = onHand;
-
-	currentState->EnterState();
-	// currentState->BindInputComponent(playerInputComponent);
-	SetState(currentState);
+	
+	SetState(onHand);
+	
 }
 
 void UWeaponaryStateMachine::EnterMachine() {
@@ -61,7 +60,7 @@ void UWeaponaryStateMachine::BindInputComponent(UInputComponent* inputComponent)
 		UE_LOG(LogTemp, Error, TEXT("HandActionStateMachine: InputComponent is null"));
 	}
 	else{
-		// playerInputComponent = inputComponent;
+		playerInputComponentWSM = inputComponent;
 	}
 	currentState->BindInputComponent(inputComponent);
 }
